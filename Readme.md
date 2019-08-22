@@ -26,6 +26,10 @@ Archivo Ard_Mux_Dimmer.ino:
 
 
 
+Info de la librería Mux.h: https://github.com/mikedotalmond/Arduino-Mux-CD74HC4067
+
+
+
 
 Archivo Arduino_Multiplexor.ino:
 
