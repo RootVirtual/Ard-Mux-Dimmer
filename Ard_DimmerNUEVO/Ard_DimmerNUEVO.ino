@@ -1,19 +1,19 @@
 
-unsigned char channel_1 = 7;    // Output to Opto Triac pin, channel 1
-unsigned char channel_2 = 6;    // Output to Opto Triac pin, channel 2
-unsigned char channel_3 = 5;
-unsigned char channel_4 = 4;
+#include <Mux.h>
+Mux mux(2,3,4,5,4); // initialise on construct...
+
 unsigned char dimming = 3;      // Dimming level (0-100)
 unsigned char i;
 unsigned char flag=0;
 unsigned char oh=1;
 
 void setup() {
+
+  Serial.begin(9600);
+  mux.setup(8,9,10,11,5); // initialise Mux
+  
   // put your setup code here, to run once:
-  pinMode(channel_1, OUTPUT);// Set AC Load pin as output
-  pinMode(channel_2, OUTPUT);// Set AC Load pin as output
-  pinMode(channel_3, OUTPUT);
-  pinMode(channel_4, OUTPUT);
+ 
   attachInterrupt(1, zero_crosss_int, RISING);
 
   // Serial.begin(9600);
@@ -28,21 +28,21 @@ void zero_crosss_int(){  // function to be fired at the zero crossing to dim the
   delayMicroseconds(dimtime);    // Off cycle
   
   if (flag==0){
-    digitalWrite(channel_1, HIGH);   // triac firing
+    mux.write(0, HIGH);   // triac firing
     delayMicroseconds(10);         // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_1, LOW);    // triac Off
+    mux.write(0, LOW);    // triac Off
    }else if(flag==1){
-    digitalWrite(channel_2, HIGH);   // triac firing
+    mux.write(1, HIGH);   // triac firing
     delayMicroseconds(10);         // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_2, LOW);    // triac Off
+    mux.write(1, LOW);    // triac Off
    }else if(flag==2){
-    digitalWrite(channel_3, HIGH);   // triac firing
+    mux.write(2, HIGH);   // triac firing
     delayMicroseconds(10);         // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_3, LOW);    // triac Off
+    mux.write(2, LOW);    // triac Off
    }else if(flag==3){
-    digitalWrite(channel_4, HIGH);   // triac firing
+    mux.write(3, HIGH);   // triac firing
     delayMicroseconds(10);         // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_4, LOW);    // triac Off
+    mux.write(3, LOW);    // triac Off
    }
 }
 
