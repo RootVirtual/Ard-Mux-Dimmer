@@ -1,10 +1,15 @@
 
-Código para conectar Arduino a un módulo Dimmer de 4 Canales a través de multiplexor.
+Encender bombillas simultáneamente a diferentes intensidades.
 
-Archivo Ard_Mux_Dimmer.ino:
+Código para conectar Arduino a un módulo Dimmer de 4 Canales a través de multiplexor y encender bombillas, recibiendo datos por Serial
+Código para pasar datos desde Processing por Serial a Arduino
 
-1.- Se inicia con el código que enciende luces a distinta intensidad desde Arduino al módulo Dimmer con 4 canales con bombillas dimmeables a 220v AC.
-2.- Se añade código para que haga lo mismo, pero pasando por un multiplexor. El pin 3 de Arduino se conecta directamente con el módulo dimmer.
+
+Carpeta ArdMuxDimmer4CHProcessingArduino
+
+
+Conexión entre:   Arduino - Multiplexor - 4CH de Dimmer
+
 
   Arduino	Mux	Dimmer   Mux
 
