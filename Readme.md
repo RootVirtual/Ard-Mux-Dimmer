@@ -17,6 +17,7 @@ Archivo Ard_Mux_Dimmer.ino:
     Gnd ----- Gnd/En --- Gnd
 
 
+
 Archivo Arduino_Multiplexor.ino:
 
 1.- Código original para encender 16 leds de una en una desde Arduino con un multiplexor. Código de ejemplo para el código de Ard_Mux_Dimmer.ino
