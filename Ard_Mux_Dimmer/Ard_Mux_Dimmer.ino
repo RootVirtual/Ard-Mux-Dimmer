@@ -1,21 +1,20 @@
 // Testing sketch for 50Hz !!!
 
 #include <TimerOne.h>
+#include <Mux.h>
 
-unsigned char channel_1 = 7; // Output to Opto Triac pin, channel 1
-unsigned char channel_2 = 6; // Output to Opto Triac pin, channel 2
-unsigned char channel_3 = 5; // Output to Opto Triac pin, channel 3
-unsigned char channel_4 = 4; // Output to Opto Triac pin, channel 4
+Mux mux(2,3,4,5,4); // initialise on construct...
+int counter=0;
+
 unsigned char CH1, CH2, CH3, CH4;
 unsigned char i=0;
 unsigned int delay_time=2500; // delay ms or SPEED
 unsigned char clock_tick; // variable for Timer1
 
 void setup() {
-pinMode(channel_1, OUTPUT);// Set AC Load pin as output
-pinMode(channel_2, OUTPUT);// Set AC Load pin as output
-pinMode(channel_3, OUTPUT);// Set AC Load pin as output
-pinMode(channel_4, OUTPUT);// Set AC Load pin as output
+Serial.begin(9600);
+mux.setup(8,9,10,11,4); // initialise Mux
+
 attachInterrupt(1, zero_crosss_int, RISING);
 Timer1.initialize(100); // set a timer of length 100 microseconds for 50Hz or 83 microseconds for 60Hz;
 Timer1.attachInterrupt( timerIsr ); // attach the service routine here
@@ -26,27 +25,27 @@ void timerIsr(){
   clock_tick++;
   
   if (CH1==clock_tick){
-    digitalWrite(channel_1, HIGH); // triac firing
+    mux.write(0, HIGH); // triac firing
     delayMicroseconds(10); // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_1, LOW); // triac Off
+    mux.write(0, LOW); // triac Off
   }
   
   if (CH2==clock_tick){
-    digitalWrite(channel_2, HIGH); // triac firing
+    mux.write(1, HIGH); // triac firing
     delayMicroseconds(10); // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_2, LOW); // triac Off
+    mux.write(1, LOW); // triac Off
   }
   
   if (CH3==clock_tick){
-    digitalWrite(channel_3, HIGH); // triac firing
+    mux.write(2, HIGH); // triac firing
     delayMicroseconds(10); // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_3, LOW); // triac Off
+    mux.write(2, LOW); // triac Off
   }
   
   if (CH4==clock_tick){
-    digitalWrite(channel_4, HIGH); // triac firing
+    mux.write(3, HIGH); // triac firing
     delayMicroseconds(10); // triac On propogation delay (for 60Hz use 8.33)
-    digitalWrite(channel_4, LOW); // triac Off
+    mux.write(3, LOW); // triac Off
   }
 }
 
