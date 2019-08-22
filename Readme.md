@@ -7,6 +7,7 @@ Archivo Ard_Mux_Dimmer.ino:
 2.- Se añade código para que haga lo mismo, pero pasando por un multiplexor. El pin 3 de Arduino se conecta directamente con el módulo dimmer.
 
   Arduino	Mux	Dimmer   Mux
+
      8 -------- S3	 Ch1 ---- Y0
 
      9 -------- S2	 Ch2 ---- Y1
